@@ -1,5 +1,6 @@
 package interfaz;
 
+
 import AbstractFactory.FabricaAbstracta;
 import AbstractFactory.FabricaElfos;
 import AbstractFactory.FabricaEnanos;
@@ -43,7 +44,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 	private JPanel pnlPrincipal;
 
 	private boolean genera = false;
-
+        private VentanaPoblacion ventanaPoblacion;
 	private JButton btnRegresar;
 	private JToggleButton btnPersonaje1;
 	private JToggleButton btnPersonaje2;
@@ -68,7 +69,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 	public JSpinner spnCantidad;
 	
-	String cadena;
+	private String cadena;
 	
 
 	public VentanaPersonajes() {
@@ -79,6 +80,12 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+        public VentanaPoblacion getVentanaPoblacion(){
+            if(ventanaPoblacion==null){
+                ventanaPoblacion=new VentanaPoblacion();
+            }
+            return ventanaPoblacion;
+        }
 
 	public void iniciarComponentes() {
 
@@ -286,7 +293,12 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		add(pnlPrincipal);
 		this.setVisible(true);
 	}
-
+        public String getCantidadPersonajes(){
+            return cadena;
+        }
+        public void setCantidadPersonajes(String cadena){
+            this.cadena=cadena;
+        }
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -612,22 +624,27 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 			} else if ((Integer) spnCantidad.getValue() != 0 && genera == true) {
 
 				if (btnPersonaje1.isSelected() == true) {
-					
-					cadena ="Se han creado " + spnCantidad.getValue() +" Hobbit/s";
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Hobbit/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() +" Hobbit/s");
+                                        System.out.println(cadena);
 					
 				} else if (btnPersonaje2.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Humano/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Humano/s");
+					System.out.println(cadena);
 				} else if (btnPersonaje3.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Elfo/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Elfo/s");
+					System.out.println(cadena);
 				} else if (btnPersonaje4.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Mago/s");
+                                    setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Mago/s");
+					System.out.println(cadena);
 				} else if (btnPersonaje5.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Enanos/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Enanos/s");
+					System.out.println(cadena);
 				} else if (btnPersonaje6.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Gollum/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Gollum/s");
+					System.out.println(cadena);
 				} else if (btnPersonaje7.isSelected() == true) {
-					System.out.println("Se han creado " + spnCantidad.getValue() + " Orco/s");
+                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Orco/s");
+					System.out.println(cadena);
 				}
 
 //				new VentanaPoblacion();
@@ -655,8 +672,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		}
 		
 		 else if (e.getSource() == btnVerAldea){
-			 new VentanaPoblacion();
-			this.setVisible(false);
+                        getVentanaPoblacion().setCadena(cadena);
+                        System.out.println(getVentanaPoblacion().getCadena());
+                        this.setVisible(false);
 		}
 
 	}

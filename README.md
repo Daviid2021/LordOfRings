@@ -63,4 +63,9 @@ La idea es escoger un personaje, y generar una cantidad determinada, para luego 
 * Brayan Alejandro Riveros Rodríguez - 20201020084.
 
 
+<<<<<<< HEAD
 _Estudiantes de Ingenieria de Sistemas de la Universidad Distrital_
+=======
+_Estudiantes de Ingenieria de Sistemas de la Universidad Distrital_
+
+>>>>>>> 68b845f72b12ae14c15a54f96fda44067abd9e5c
