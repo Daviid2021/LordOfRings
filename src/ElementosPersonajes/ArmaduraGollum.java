@@ -1,9 +1,10 @@
 package ElementosPersonajes;
 
+public class ArmaduraGollum implements Armadura{
 
-public class ArmaHumanos implements Arma{
     @Override
     public String operacion() {
-        return "Espada Reforzada";
+        return "0.1";
     }
+    
 }

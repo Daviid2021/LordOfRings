@@ -3,7 +3,7 @@ package ElementosPersonajes;
 public class ArmaduraElfos implements Armadura{
 
     @Override
-    public String Resistencia() {
+    public String operacion() {
         return "0.7";
     }
     

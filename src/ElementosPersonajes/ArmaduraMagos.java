@@ -4,7 +4,7 @@ package ElementosPersonajes;
 public class ArmaduraMagos implements Armadura{
 
     @Override
-    public String Resistencia() {
+    public String operacion() {
         return "1.2";
     }
     

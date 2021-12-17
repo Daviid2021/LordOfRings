@@ -3,7 +3,7 @@ package ElementosPersonajes;
 public class VidaHobbits implements Vida{
 
     @Override
-    public String cantidadVida() {
+    public String operacion() {
         return "20";
     }
     

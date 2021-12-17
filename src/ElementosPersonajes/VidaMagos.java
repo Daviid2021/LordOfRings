@@ -1,9 +1,10 @@
 package ElementosPersonajes;
 
+public class VidaMagos implements Vida{
 
-public class ArmaHumanos implements Arma{
     @Override
     public String operacion() {
-        return "Espada Reforzada";
+        return "50";
     }
+    
 }

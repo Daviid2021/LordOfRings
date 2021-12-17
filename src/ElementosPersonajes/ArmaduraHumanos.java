@@ -3,7 +3,7 @@ package ElementosPersonajes;
 
 public class ArmaduraHumanos implements Armadura{
     @Override
-    public String Resistencia() {
+    public String operacion() {
         return "2.0";
     }
 }

@@ -3,7 +3,7 @@ package ElementosPersonajes;
 public class ArmaMagos implements Arma{
 
     @Override
-    public String tipoArma() {
+    public String operacion() {
         return "Vara Magica";
     }
     

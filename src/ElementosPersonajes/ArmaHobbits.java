@@ -1,9 +1,8 @@
-
 package ElementosPersonajes;
 
 public class ArmaHobbits implements Arma{
     @Override
-    public String tipoArma() {
+    public String operacion() {
         return "Espada";
     }
 }

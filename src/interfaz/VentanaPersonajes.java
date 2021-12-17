@@ -1,6 +1,16 @@
 package interfaz;
 
-
+import AbstractFactory.FabricaAbstracta;
+import AbstractFactory.FabricaElfos;
+import AbstractFactory.FabricaEnanos;
+import AbstractFactory.FabricaGollum;
+import AbstractFactory.FabricaHobbits;
+import AbstractFactory.FabricaHumanos;
+import AbstractFactory.FabricaMagos;
+import AbstractFactory.FabricaOrcos;
+import ElementosPersonajes.Arma;
+import ElementosPersonajes.Armadura;
+import ElementosPersonajes.Vida;
 import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -15,22 +25,35 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import java.awt.Color;
 
 public class VentanaPersonajes extends JFrame implements ActionListener {
-
+	FabricaAbstracta Fabrica;
+	Arma arma;
+	Armadura armadura;
+	Vida vida;
+	
+	
+	
+	
 	private JPanel pnlPrincipal;
 
+	private boolean genera = false;
+
 	private JButton btnRegresar;
-	private JButton btnPersonaje1;
-	private JButton btnPersonaje2;
-	private JButton btnPersonaje3;
-	private JButton btnPersonaje4;
-	private JButton btnPersonaje5;
-	private JButton btnPersonaje6;
-	private JButton btnPersonaje7;
+	private JToggleButton btnPersonaje1;
+	private JToggleButton btnPersonaje2;
+	private JToggleButton btnPersonaje3;
+	private JToggleButton btnPersonaje4;
+	private JToggleButton btnPersonaje5;
+	private JToggleButton btnPersonaje6;
+	private JToggleButton btnPersonaje7;
 	private JButton btnGenerar;
+	private JButton btnVerAldea;
 
 	private JLabel lblFondo;
 	private JLabel lblPersonaje1;
@@ -41,16 +64,12 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 	private JLabel lblPersonaje6;
 	private JLabel lblPersonaje7;
 	private JLabel lblCantidad;
-
-	private JLabel lblCaracteristicas1;
-	private JLabel lblCaracteristicas2;
-	private JLabel lblCaracteristicas3;
-	private JLabel lblCaracteristicas4;
-	private JLabel lblCaracteristicas5;
-	private JLabel lblCaracteristicas6;
-	private JLabel lblCaracteristicas7;
+	private JLabel lblCaracteristicas;
 
 	public JSpinner spnCantidad;
+	
+	String cadena;
+	
 
 	public VentanaPersonajes() {
 		setSize(800, 600); // Establecer tamaño
@@ -58,6 +77,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);// salga en el centro
 		iniciarComponentes();
 		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	public void iniciarComponentes() {
@@ -86,7 +106,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje 1
 
-		btnPersonaje1 = new JButton();
+		btnPersonaje1 = new JToggleButton();
 		btnPersonaje1.setText("Hobbit");
 		btnPersonaje1.setBounds(70, 70, 120, 40);
 		btnPersonaje1.addActionListener(this);
@@ -96,16 +116,14 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje1.setBounds(400, 100, 200, 400);
 		lblPersonaje1.setVisible(false);
 
-    
-		lblCaracteristicas1 = new JLabel();
-		lblCaracteristicas1.setText("<html><body>Vida:20 <br> Armadura: 1.0 <br>Arma: Espada </body></html>"); // Aca
-																												// se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas1.setBounds(600, 100, 200, 400);
-		lblCaracteristicas1.setForeground(Color.WHITE);
-		lblCaracteristicas1.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas1.setVisible(false);
+		lblCaracteristicas = new JLabel();
+		// se
+		// colocaria
+		// personaje1.getCaracteristicas;
+		lblCaracteristicas.setBounds(600, 100, 200, 400);
+		lblCaracteristicas.setForeground(Color.WHITE);
+		lblCaracteristicas.setFont(new Font("arial", Font.ITALIC, 16));
+		lblCaracteristicas.setVisible(false);
 
 		ImageIcon Personaje1 = new ImageIcon("img/Personaje1.png");
 		Icon Psj1 = new ImageIcon(Personaje1.getImage().getScaledInstance(lblPersonaje1.getWidth(),
@@ -113,7 +131,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje1.setIcon(Psj1);
 
 		// Personaje 2
-		btnPersonaje2 = new JButton();
+		btnPersonaje2 = new JToggleButton();
 		btnPersonaje2.setText("Humano");
 		btnPersonaje2.setBounds(70, 140, 120, 40);
 		btnPersonaje2.addActionListener(this);
@@ -123,16 +141,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje2.setBounds(400, 30, 200, 470);
 		lblPersonaje2.setVisible(false);
 
-		lblCaracteristicas2 = new JLabel();
-		lblCaracteristicas2
-				.setText("<html><body>Vida: 25 <br> Armadura: 2.0 <br>Arma: Espada Reforzada </body></html>"); // Aca se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas2.setBounds(600, 100, 200, 400);
-		lblCaracteristicas2.setForeground(Color.WHITE);
-		lblCaracteristicas2.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas2.setVisible(false);
-
 		ImageIcon Personaje2 = new ImageIcon("img/Personaje2.png");
 		Icon Psj2 = new ImageIcon(Personaje2.getImage().getScaledInstance(lblPersonaje2.getWidth(),
 				lblPersonaje2.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -140,7 +148,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje 3
 
-		btnPersonaje3 = new JButton();
+		btnPersonaje3 = new JToggleButton();
 		btnPersonaje3.setText("Elfo");
 		btnPersonaje3.setBounds(70, 210, 120, 40);
 		btnPersonaje3.addActionListener(this);
@@ -150,15 +158,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje3.setBounds(350, 100, 200, 400);
 		lblPersonaje3.setVisible(false);
 
-		lblCaracteristicas3 = new JLabel();
-		lblCaracteristicas3.setText("<html><body>Vida: 18 <br> Armadura: 0.7 <br>Arma: Arco </body></html>"); // Aca se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas3.setBounds(600, 100, 200, 400);
-		lblCaracteristicas3.setForeground(Color.WHITE);
-		lblCaracteristicas3.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas3.setVisible(false);
-
 		ImageIcon Personaje3 = new ImageIcon("img/Personaje3.png");
 		Icon Psj3 = new ImageIcon(Personaje3.getImage().getScaledInstance(lblPersonaje3.getWidth(),
 				lblPersonaje3.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -166,7 +165,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje4
 
-		btnPersonaje4 = new JButton();
+		btnPersonaje4 = new JToggleButton();
 		btnPersonaje4.setText("Mago");
 		btnPersonaje4.setBounds(70, 280, 120, 40);
 		btnPersonaje4.addActionListener(this);
@@ -176,16 +175,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje4.setBounds(320, 100, 230, 400);
 		lblPersonaje4.setVisible(false);
 
-		lblCaracteristicas4 = new JLabel();
-		lblCaracteristicas4.setText("<html><body>Vida: 50 <br> Armadura: 1.2 <br>Arma: Vara Mágica </body></html>"); // Aca
-																														// se
-																														// colocaria
-																														// personaje1.getCaracteristicas;
-		lblCaracteristicas4.setBounds(600, 100, 200, 400);
-		lblCaracteristicas4.setForeground(Color.WHITE);
-		lblCaracteristicas4.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas4.setVisible(false);
-
 		ImageIcon Personaje4 = new ImageIcon("img/Personaje4.png");
 		Icon Psj4 = new ImageIcon(Personaje4.getImage().getScaledInstance(lblPersonaje4.getWidth(),
 				lblPersonaje4.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -193,7 +182,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje 5
 
-		btnPersonaje5 = new JButton();
+		btnPersonaje5 = new JToggleButton();
 		btnPersonaje5.setText("Enano");
 		btnPersonaje5.setBounds(70, 350, 120, 40);
 		btnPersonaje5.addActionListener(this);
@@ -203,15 +192,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje5.setBounds(350, 100, 200, 400);
 		lblPersonaje5.setVisible(false);
 
-		lblCaracteristicas5 = new JLabel();
-		lblCaracteristicas5.setText("<html><body>Vida: 30 <br> Armadura: 3.0 <br>Arma: Hacha </body></html>"); // Aca se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas5.setBounds(600, 100, 200, 400);
-		lblCaracteristicas5.setForeground(Color.WHITE);
-		lblCaracteristicas5.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas5.setVisible(false);
-
 		ImageIcon Personaje5 = new ImageIcon("img/Personaje5.png");
 		Icon Psj5 = new ImageIcon(Personaje5.getImage().getScaledInstance(lblPersonaje5.getWidth(),
 				lblPersonaje5.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -219,7 +199,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje 6
 
-		btnPersonaje6 = new JButton();
+		btnPersonaje6 = new JToggleButton();
 		btnPersonaje6.setText("Gollum");
 		btnPersonaje6.setBounds(70, 420, 120, 40);
 		btnPersonaje6.addActionListener(this);
@@ -229,15 +209,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje6.setBounds(350, 100, 200, 400);
 		lblPersonaje6.setVisible(false);
 
-		lblCaracteristicas6 = new JLabel();
-		lblCaracteristicas6.setText("<html><body>Vida: 5 <br> Armadura: 0.1 <br>Arma: Ninguna </body></html>"); // Aca se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas6.setBounds(600, 100, 200, 400);
-		lblCaracteristicas6.setForeground(Color.WHITE);
-		lblCaracteristicas6.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas6.setVisible(false);
-
 		ImageIcon Personaje6 = new ImageIcon("img/Personaje6.png");
 		Icon Psj6 = new ImageIcon(Personaje6.getImage().getScaledInstance(lblPersonaje6.getWidth(),
 				lblPersonaje6.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -245,7 +216,7 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Personaje 7
 
-		btnPersonaje7 = new JButton();
+		btnPersonaje7 = new JToggleButton();
 		btnPersonaje7.setText("Orco");
 		btnPersonaje7.setBounds(70, 490, 120, 40);
 		btnPersonaje7.addActionListener(this);
@@ -255,15 +226,6 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje7.setBounds(350, 100, 200, 400);
 		lblPersonaje7.setVisible(false);
 
-		lblCaracteristicas7 = new JLabel();
-		lblCaracteristicas7.setText("<html><body>Vida: 25 <br> Armadura: 2.8 <br>Arma: Doble Hacha </body></html>"); // Aca se
-																												// colocaria
-																												// personaje1.getCaracteristicas;
-		lblCaracteristicas7.setBounds(600, 100, 200, 400);
-		lblCaracteristicas7.setForeground(Color.WHITE);
-		lblCaracteristicas7.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas7.setVisible(false);
-
 		ImageIcon Personaje7 = new ImageIcon("img/Personaje7.png");
 		Icon Psj7 = new ImageIcon(Personaje7.getImage().getScaledInstance(lblPersonaje5.getWidth(),
 				lblPersonaje5.getHeight(), Image.SCALE_AREA_AVERAGING));
@@ -271,7 +233,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 		// Botones y complementos de Abajo
 
-		spnCantidad = new JSpinner();
+		SpinnerModel sm = new SpinnerNumberModel(1, 0, 9, 1);
+		spnCantidad = new JSpinner(sm);
 		spnCantidad.setBounds(490, 520, 50, 25);
 
 		lblCantidad = new JLabel();
@@ -285,38 +248,38 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		btnGenerar.setText("Generar");
 		btnGenerar.addActionListener(this);
 
+		btnVerAldea = new JButton();
+		btnVerAldea.setBounds(610, 450, 120, 40);
+		btnVerAldea.setText("Ver Aldea");
+		btnVerAldea.addActionListener(this);
+
 		pnlPrincipal.add(btnRegresar);
 		pnlPrincipal.add(btnPersonaje1);
 		pnlPrincipal.add(lblPersonaje1);
-		pnlPrincipal.add(lblCaracteristicas1);
+		pnlPrincipal.add(lblCaracteristicas);
 
 		pnlPrincipal.add(btnPersonaje2);
 		pnlPrincipal.add(lblPersonaje2);
-		pnlPrincipal.add(lblCaracteristicas2);
 
 		pnlPrincipal.add(btnPersonaje3);
 		pnlPrincipal.add(lblPersonaje3);
-		pnlPrincipal.add(lblCaracteristicas3);
 
 		pnlPrincipal.add(btnPersonaje4);
 		pnlPrincipal.add(lblPersonaje4);
-		pnlPrincipal.add(lblCaracteristicas4);
 
 		pnlPrincipal.add(btnPersonaje5);
 		pnlPrincipal.add(lblPersonaje5);
-		pnlPrincipal.add(lblCaracteristicas5);
 
 		pnlPrincipal.add(btnPersonaje6);
 		pnlPrincipal.add(lblPersonaje6);
-		pnlPrincipal.add(lblCaracteristicas6);
 
 		pnlPrincipal.add(btnPersonaje7);
 		pnlPrincipal.add(lblPersonaje7);
-		pnlPrincipal.add(lblCaracteristicas7);
 
 		pnlPrincipal.add(spnCantidad);
 		pnlPrincipal.add(lblCantidad);
 		pnlPrincipal.add(btnGenerar);
+		pnlPrincipal.add(btnVerAldea);
 
 		pnlPrincipal.add(lblFondo);
 
@@ -326,6 +289,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
 
 		if (e.getSource() == btnRegresar) {
 
@@ -334,143 +299,365 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == btnPersonaje1) {
-
-			lblPersonaje1.setVisible(true);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(true);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(false);
-
-		} else if (e.getSource() == btnPersonaje2) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(true);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(true);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(false);
-
-		} else if (e.getSource() == btnPersonaje3) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(true);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(true);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(false);
-		}
-
-		else if (e.getSource() == btnPersonaje4) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(true);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(true);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(false);
-		} else if (e.getSource() == btnPersonaje5) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(true);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(true);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(false);
-		} else if (e.getSource() == btnPersonaje6) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(true);
-			lblPersonaje7.setVisible(false);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(true);
-			lblCaracteristicas7.setVisible(false);
-		} else if (e.getSource() == btnPersonaje7) {
-
-			lblPersonaje1.setVisible(false);
-			lblPersonaje2.setVisible(false);
-			lblPersonaje3.setVisible(false);
-			lblPersonaje4.setVisible(false);
-			lblPersonaje5.setVisible(false);
-			lblPersonaje6.setVisible(false);
-			lblPersonaje7.setVisible(true);
-
-			lblCaracteristicas1.setVisible(false);
-			lblCaracteristicas2.setVisible(false);
-			lblCaracteristicas3.setVisible(false);
-			lblCaracteristicas4.setVisible(false);
-			lblCaracteristicas5.setVisible(false);
-			lblCaracteristicas6.setVisible(false);
-			lblCaracteristicas7.setVisible(true);
-		} else if (e.getSource() == btnGenerar) {
-
-			if ((Integer) spnCantidad.getValue() == 0) {
-				JOptionPane.showMessageDialog(null, "No se pueden Generar 0");
-			} else {
-				System.out.println("Se han creado " + spnCantidad.getValue());
-        new VentanaPoblacion();
+			
+			if(btnPersonaje1.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(true);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaHobbits();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje2.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+				
+				
+				
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
 			}
 
 			
 
-			spnCantidad.setValue(0);
+		} else if (e.getSource() == btnPersonaje2) {
 
+			if(btnPersonaje2.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(true);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaHumanos();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+				
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+			}
+			
+
+		} else if (e.getSource() == btnPersonaje3) {
+
+			if(btnPersonaje3.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(true);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaElfos();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje2.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+				
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+				
+			}
+			
+		
+		}
+
+		else if (e.getSource() == btnPersonaje4) {
+
+			
+			if(btnPersonaje4.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(true);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaMagos();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje2.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+				
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+				
+			}
+		
+
+		} else if (e.getSource() == btnPersonaje5) {
+
+			if(btnPersonaje5.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(true);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaEnanos();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje2.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+				
+			}
+			
+			
+		
+		} else if (e.getSource() == btnPersonaje6) {
+
+			if(btnPersonaje6.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(true);
+				lblPersonaje7.setVisible(false);
+				Fabrica = new FabricaGollum();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje2.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje7.setSelected(false);
+				
+				
+			}
+			else {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+			}
+			
+			
+
+		} else if (e.getSource() == btnPersonaje7) {
+
+			if(btnPersonaje7.isSelected()==true) {
+				
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(true);
+				Fabrica = new FabricaOrcos();
+				arma = Fabrica.crearArma();
+				armadura = Fabrica.crearArmadura();
+				vida = Fabrica.crearVida();
+				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
+						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
+				lblCaracteristicas.setVisible(true);
+				
+				btnPersonaje1.setSelected(false);
+				btnPersonaje2.setSelected(false);
+				btnPersonaje3.setSelected(false);
+				btnPersonaje4.setSelected(false);
+				btnPersonaje5.setSelected(false);
+				btnPersonaje6.setSelected(false);
+				
+				
+			}
+			else {
+				lblPersonaje1.setVisible(false);
+				lblPersonaje2.setVisible(false);
+				lblPersonaje3.setVisible(false);
+				lblPersonaje4.setVisible(false);
+				lblPersonaje5.setVisible(false);
+				lblPersonaje6.setVisible(false);
+				lblPersonaje7.setVisible(false);
+				lblCaracteristicas.setVisible(false);
+
+			}
+			
+			
+
+		} else if (e.getSource() == btnGenerar) {
+
+			
+			
+			if (btnPersonaje1.isSelected() == false && btnPersonaje2.isSelected() == false
+					&& btnPersonaje3.isSelected() == false && btnPersonaje4.isSelected() == false
+					&& btnPersonaje5.isSelected() == false && btnPersonaje6.isSelected() == false
+					&& btnPersonaje7.isSelected() == false) {
+				JOptionPane.showMessageDialog(null, "Debe seleccionar un personaje");
+
+				genera = false;
+			} else {
+				genera = true;
+			}
+
+			if ((Integer) spnCantidad.getValue() == 0) {
+				JOptionPane.showMessageDialog(null, "No se pueden Generar 0");
+			} else if ((Integer) spnCantidad.getValue() != 0 && genera == true) {
+
+				if (btnPersonaje1.isSelected() == true) {
+					
+					cadena ="Se han creado " + spnCantidad.getValue() +" Hobbit/s";
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Hobbit/s");
+					
+				} else if (btnPersonaje2.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Humano/s");
+				} else if (btnPersonaje3.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Elfo/s");
+				} else if (btnPersonaje4.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Mago/s");
+				} else if (btnPersonaje5.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Enanos/s");
+				} else if (btnPersonaje6.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Gollum/s");
+				} else if (btnPersonaje7.isSelected() == true) {
+					System.out.println("Se han creado " + spnCantidad.getValue() + " Orco/s");
+				}
+
+//				new VentanaPoblacion();
+//				this.setVisible(false);
+				btnPersonaje1.setSelected(false);
+				lblPersonaje1.setVisible(false);
+				btnPersonaje2.setSelected(false);
+				lblPersonaje2.setVisible(false);
+				btnPersonaje3.setSelected(false);
+				lblPersonaje3.setVisible(false);
+				btnPersonaje4.setSelected(false);
+				lblPersonaje4.setVisible(false);
+				btnPersonaje5.setSelected(false);
+				lblPersonaje5.setVisible(false);
+				btnPersonaje6.setSelected(false);
+				lblPersonaje6.setVisible(false);
+				btnPersonaje7.setSelected(false);
+				lblPersonaje7.setVisible(false);
+				
+				lblCaracteristicas.setVisible(false);
+
+				spnCantidad.setValue(0);
+			}
+
+		}
+		
+		 else if (e.getSource() == btnVerAldea){
+			 new VentanaPoblacion();
+			this.setVisible(false);
 		}
 
 	}
-
 }

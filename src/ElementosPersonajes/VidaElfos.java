@@ -1,9 +1,11 @@
 package ElementosPersonajes;
 
 
-public class ArmaHumanos implements Arma{
+public class VidaElfos implements Vida{
+
     @Override
     public String operacion() {
-        return "Espada Reforzada";
+        return "18";
     }
+    
 }

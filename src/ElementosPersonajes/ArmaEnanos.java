@@ -1,11 +1,10 @@
-
 package ElementosPersonajes;
 
 
 public class ArmaEnanos implements Arma{
 
     @Override
-    public String tipoArma() {
+    public String operacion() {
         return "Hacha";
     }
     

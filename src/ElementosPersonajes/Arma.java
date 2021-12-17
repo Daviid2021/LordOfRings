@@ -1,5 +1,6 @@
 package ElementosPersonajes;
 
+
 public interface Arma {
-    public String tipoArma();
+    public String operacion();
 }

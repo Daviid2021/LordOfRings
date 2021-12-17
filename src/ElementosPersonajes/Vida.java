@@ -1,5 +1,5 @@
 package ElementosPersonajes;
 
 public interface Vida {
-    public String cantidadVida();
+    public String operacion();
 }

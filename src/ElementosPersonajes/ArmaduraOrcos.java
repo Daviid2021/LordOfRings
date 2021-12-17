@@ -1,10 +1,9 @@
-
 package ElementosPersonajes;
 
 
 public class ArmaduraOrcos implements Armadura{
     @Override
-    public String Resistencia() {
+    public String operacion() {
         return "1.5";
     }
 }
