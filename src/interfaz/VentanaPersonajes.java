@@ -1,6 +1,5 @@
 package interfaz;
 
-
 import AbstractFactory.FabricaAbstracta;
 import AbstractFactory.FabricaElfos;
 import AbstractFactory.FabricaEnanos;
@@ -12,12 +11,11 @@ import AbstractFactory.FabricaOrcos;
 import ElementosPersonajes.Arma;
 import ElementosPersonajes.Armadura;
 import ElementosPersonajes.Vida;
-import java.io.*;
-import java.awt.event.*;
-import java.awt.*;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,22 +27,20 @@ import javax.swing.JSpinner;
 import javax.swing.JToggleButton;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 
 public class VentanaPersonajes extends JFrame implements ActionListener {
 	FabricaAbstracta Fabrica;
 	Arma arma;
 	Armadura armadura;
 	Vida vida;
-	
-	
-	
-	
+
 	private JPanel pnlPrincipal;
 
 	private boolean genera = false;
-        private VentanaPoblacion ventanaPoblacion;
+	private VentanaPoblacion ventanaPoblacion;
 	private JButton btnRegresar;
 	private JToggleButton btnPersonaje1;
 	private JToggleButton btnPersonaje2;
@@ -68,30 +64,46 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 	private JLabel lblCaracteristicas;
 
 	public JSpinner spnCantidad;
-	
+
 	private String cadena;
-	
 
 	public VentanaPersonajes() {
-		setSize(800, 600); // Establecer tamaño
+		setSize(800, 600); // Establecer tamaÃ±o
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("The Lord Of Rings"); // Agregar Titulo;
 		setLocationRelativeTo(null);// salga en el centro
-		iniciarComponentes();
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		iniciarComponentes();
+
 	}
-        public VentanaPoblacion getVentanaPoblacion(){
-            if(ventanaPoblacion==null){
-                ventanaPoblacion=new VentanaPoblacion();
-            }
-            return ventanaPoblacion;
-        }
+
+	public VentanaPoblacion getVentanaPoblacion() {
+		if (ventanaPoblacion == null) {
+			ventanaPoblacion = new VentanaPoblacion();
+		}
+		return ventanaPoblacion;
+	}
 
 	public void iniciarComponentes() {
+		crearPanel();
+		crearPersonaje();
+		crearBotones();
+		crearComplementos();
+		crearLabels();
+
+	}
+
+	private void crearPanel() {
 
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setLayout(null);
+		this.getContentPane().add(pnlPrincipal);
+		this.setVisible(true);
 
+	}
+
+	private void crearBotones() {
 		btnRegresar = new JButton();
 		btnRegresar.setBounds(20, 20, 30, 30);
 		btnRegresar.addActionListener(this);
@@ -102,6 +114,24 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				btnRegresar.getHeight(), Image.SCALE_SMOOTH));
 		btnRegresar.setIcon(IconRegresar);
 
+		btnGenerar = new JButton();
+		btnGenerar.setBounds(610, 510, 120, 40);
+		btnGenerar.setText("Generar");
+		btnGenerar.addActionListener(this);
+
+		btnVerAldea = new JButton();
+		btnVerAldea.setBounds(610, 450, 120, 40);
+		btnVerAldea.setText("Ver Aldea");
+		btnVerAldea.addActionListener(this);
+
+		pnlPrincipal.add(btnGenerar);
+		pnlPrincipal.add(btnVerAldea);
+		pnlPrincipal.add(btnRegresar);
+
+	}
+
+	private void crearLabels() {
+
 		lblFondo = new JLabel();
 		lblFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
 		lblFondo.setLayout(null);
@@ -110,6 +140,29 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		Icon Banner = new ImageIcon(BannerInicio.getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(),
 				Image.SCALE_SMOOTH));
 		lblFondo.setIcon(Banner);
+
+		lblCantidad = new JLabel();
+		lblCantidad.setBounds(270, 520, 200, 25);
+		lblCantidad.setText("Cantidad a generar:");
+		lblCantidad.setForeground(Color.WHITE);
+		lblCantidad.setFont(new Font("arial", Font.ITALIC, 20));
+
+		lblCaracteristicas = new JLabel();
+		// se
+		// colocaria
+		// personaje1.getCaracteristicas;
+		lblCaracteristicas.setBounds(600, 100, 200, 400);
+		lblCaracteristicas.setForeground(Color.WHITE);
+		lblCaracteristicas.setFont(new Font("arial", Font.ITALIC, 16));
+		lblCaracteristicas.setVisible(false);
+
+		pnlPrincipal.add(lblCaracteristicas);
+		pnlPrincipal.add(lblCantidad);
+		pnlPrincipal.add(lblFondo);
+
+	}
+
+	private void crearPersonaje() {
 
 		// Personaje 1
 
@@ -123,19 +176,13 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		lblPersonaje1.setBounds(400, 100, 200, 400);
 		lblPersonaje1.setVisible(false);
 
-		lblCaracteristicas = new JLabel();
-		// se
-		// colocaria
-		// personaje1.getCaracteristicas;
-		lblCaracteristicas.setBounds(600, 100, 200, 400);
-		lblCaracteristicas.setForeground(Color.WHITE);
-		lblCaracteristicas.setFont(new Font("arial", Font.ITALIC, 16));
-		lblCaracteristicas.setVisible(false);
-
 		ImageIcon Personaje1 = new ImageIcon("img/Personaje1.png");
 		Icon Psj1 = new ImageIcon(Personaje1.getImage().getScaledInstance(lblPersonaje1.getWidth(),
 				lblPersonaje1.getHeight(), Image.SCALE_SMOOTH));
 		lblPersonaje1.setIcon(Psj1);
+
+		pnlPrincipal.add(btnPersonaje1);
+		pnlPrincipal.add(lblPersonaje1);
 
 		// Personaje 2
 		btnPersonaje2 = new JToggleButton();
@@ -152,6 +199,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		Icon Psj2 = new ImageIcon(Personaje2.getImage().getScaledInstance(lblPersonaje2.getWidth(),
 				lblPersonaje2.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje2.setIcon(Psj2);
+
+		pnlPrincipal.add(btnPersonaje2);
+		pnlPrincipal.add(lblPersonaje2);
 
 		// Personaje 3
 
@@ -170,6 +220,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje3.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje3.setIcon(Psj3);
 
+		pnlPrincipal.add(btnPersonaje3);
+		pnlPrincipal.add(lblPersonaje3);
+
 		// Personaje4
 
 		btnPersonaje4 = new JToggleButton();
@@ -186,6 +239,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		Icon Psj4 = new ImageIcon(Personaje4.getImage().getScaledInstance(lblPersonaje4.getWidth(),
 				lblPersonaje4.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje4.setIcon(Psj4);
+
+		pnlPrincipal.add(btnPersonaje4);
+		pnlPrincipal.add(lblPersonaje4);
 
 		// Personaje 5
 
@@ -204,6 +260,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje5.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje5.setIcon(Psj5);
 
+		pnlPrincipal.add(btnPersonaje5);
+		pnlPrincipal.add(lblPersonaje5);
+
 		// Personaje 6
 
 		btnPersonaje6 = new JToggleButton();
@@ -220,6 +279,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		Icon Psj6 = new ImageIcon(Personaje6.getImage().getScaledInstance(lblPersonaje6.getWidth(),
 				lblPersonaje6.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje6.setIcon(Psj6);
+
+		pnlPrincipal.add(btnPersonaje6);
+		pnlPrincipal.add(lblPersonaje6);
 
 		// Personaje 7
 
@@ -238,71 +300,39 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje5.getHeight(), Image.SCALE_AREA_AVERAGING));
 		lblPersonaje7.setIcon(Psj7);
 
-		// Botones y complementos de Abajo
+		pnlPrincipal.add(btnPersonaje7);
+		pnlPrincipal.add(lblPersonaje7);
+
+		ButtonGroup grupoToggle = new ButtonGroup();
+		grupoToggle.add(btnPersonaje1);
+		grupoToggle.add(btnPersonaje2);
+		grupoToggle.add(btnPersonaje3);
+		grupoToggle.add(btnPersonaje4);
+		grupoToggle.add(btnPersonaje5);
+		grupoToggle.add(btnPersonaje6);
+		grupoToggle.add(btnPersonaje7);
+	}
+
+	private void crearComplementos() {
 
 		SpinnerModel sm = new SpinnerNumberModel(1, 0, 9, 1);
 		spnCantidad = new JSpinner(sm);
 		spnCantidad.setBounds(490, 520, 50, 25);
 
-		lblCantidad = new JLabel();
-		lblCantidad.setBounds(270, 520, 200, 25);
-		lblCantidad.setText("Cantidad a generar:");
-		lblCantidad.setForeground(Color.WHITE);
-		lblCantidad.setFont(new Font("arial", Font.ITALIC, 20));
-
-		btnGenerar = new JButton();
-		btnGenerar.setBounds(610, 510, 120, 40);
-		btnGenerar.setText("Generar");
-		btnGenerar.addActionListener(this);
-
-		btnVerAldea = new JButton();
-		btnVerAldea.setBounds(610, 450, 120, 40);
-		btnVerAldea.setText("Ver Aldea");
-		btnVerAldea.addActionListener(this);
-
-		pnlPrincipal.add(btnRegresar);
-		pnlPrincipal.add(btnPersonaje1);
-		pnlPrincipal.add(lblPersonaje1);
-		pnlPrincipal.add(lblCaracteristicas);
-
-		pnlPrincipal.add(btnPersonaje2);
-		pnlPrincipal.add(lblPersonaje2);
-
-		pnlPrincipal.add(btnPersonaje3);
-		pnlPrincipal.add(lblPersonaje3);
-
-		pnlPrincipal.add(btnPersonaje4);
-		pnlPrincipal.add(lblPersonaje4);
-
-		pnlPrincipal.add(btnPersonaje5);
-		pnlPrincipal.add(lblPersonaje5);
-
-		pnlPrincipal.add(btnPersonaje6);
-		pnlPrincipal.add(lblPersonaje6);
-
-		pnlPrincipal.add(btnPersonaje7);
-		pnlPrincipal.add(lblPersonaje7);
-
 		pnlPrincipal.add(spnCantidad);
-		pnlPrincipal.add(lblCantidad);
-		pnlPrincipal.add(btnGenerar);
-		pnlPrincipal.add(btnVerAldea);
 
-		pnlPrincipal.add(lblFondo);
-
-		add(pnlPrincipal);
-		this.setVisible(true);
 	}
-        public String getCantidadPersonajes(){
-            return cadena;
-        }
-        public void setCantidadPersonajes(String cadena){
-            this.cadena=cadena;
-        }
+
+	public String getCantidadPersonajes() {
+		return cadena;
+	}
+
+	public void setCantidadPersonajes(String cadena) {
+		this.cadena = cadena;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		
 
 		if (e.getSource() == btnRegresar) {
 
@@ -311,9 +341,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 		}
 
 		else if (e.getSource() == btnPersonaje1) {
-			
-			if(btnPersonaje1.isSelected()==true) {
-				
+
+			if (btnPersonaje1.isSelected() == true) {
+
 				lblPersonaje1.setVisible(true);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -328,19 +358,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje2.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
-				
-				
-				
-			}
-			else {
+
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -351,12 +370,10 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setVisible(false);
 			}
 
-			
-
 		} else if (e.getSource() == btnPersonaje2) {
 
-			if(btnPersonaje2.isSelected()==true) {
-				
+			if (btnPersonaje2.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(true);
 				lblPersonaje3.setVisible(false);
@@ -371,17 +388,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
-				
-			}
-			else {
+
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -391,12 +399,11 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje7.setVisible(false);
 				lblCaracteristicas.setVisible(false);
 			}
-			
 
 		} else if (e.getSource() == btnPersonaje3) {
 
-			if(btnPersonaje3.isSelected()==true) {
-				
+			if (btnPersonaje3.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(true);
@@ -411,17 +418,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje2.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
-				
-			}
-			else {
+
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -430,17 +428,15 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje6.setVisible(false);
 				lblPersonaje7.setVisible(false);
 				lblCaracteristicas.setVisible(false);
-				
+
 			}
-			
-		
+
 		}
 
 		else if (e.getSource() == btnPersonaje4) {
 
-			
-			if(btnPersonaje4.isSelected()==true) {
-				
+			if (btnPersonaje4.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -455,17 +451,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje2.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
-				
-			}
-			else {
+
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -474,14 +461,13 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje6.setVisible(false);
 				lblPersonaje7.setVisible(false);
 				lblCaracteristicas.setVisible(false);
-				
+
 			}
-		
 
 		} else if (e.getSource() == btnPersonaje5) {
 
-			if(btnPersonaje5.isSelected()==true) {
-				
+			if (btnPersonaje5.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -496,17 +482,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje2.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
 
-			}
-			else {
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -515,15 +492,13 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje6.setVisible(false);
 				lblPersonaje7.setVisible(false);
 				lblCaracteristicas.setVisible(false);
-				
+
 			}
-			
-			
-		
+
 		} else if (e.getSource() == btnPersonaje6) {
 
-			if(btnPersonaje6.isSelected()==true) {
-				
+			if (btnPersonaje6.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -538,18 +513,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje2.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje7.setSelected(false);
-				
-				
-			}
-			else {
-				
+
+			} else {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -559,13 +525,11 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje7.setVisible(false);
 				lblCaracteristicas.setVisible(false);
 			}
-			
-			
 
 		} else if (e.getSource() == btnPersonaje7) {
 
-			if(btnPersonaje7.isSelected()==true) {
-				
+			if (btnPersonaje7.isSelected() == true) {
+
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -580,17 +544,8 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setText("<html><body>Vida: " + vida.operacion() + " <br> Armadura: "
 						+ armadura.operacion() + " <br>Arma: " + arma.operacion() + " </body></html>");
 				lblCaracteristicas.setVisible(true);
-				
-				btnPersonaje1.setSelected(false);
-				btnPersonaje2.setSelected(false);
-				btnPersonaje3.setSelected(false);
-				btnPersonaje4.setSelected(false);
-				btnPersonaje5.setSelected(false);
-				btnPersonaje6.setSelected(false);
-				
-				
-			}
-			else {
+
+			} else {
 				lblPersonaje1.setVisible(false);
 				lblPersonaje2.setVisible(false);
 				lblPersonaje3.setVisible(false);
@@ -601,13 +556,9 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblCaracteristicas.setVisible(false);
 
 			}
-			
-			
 
 		} else if (e.getSource() == btnGenerar) {
 
-			
-			
 			if (btnPersonaje1.isSelected() == false && btnPersonaje2.isSelected() == false
 					&& btnPersonaje3.isSelected() == false && btnPersonaje4.isSelected() == false
 					&& btnPersonaje5.isSelected() == false && btnPersonaje6.isSelected() == false
@@ -624,31 +575,29 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 			} else if ((Integer) spnCantidad.getValue() != 0 && genera == true) {
 
 				if (btnPersonaje1.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() +" Hobbit/s");
-                                        System.out.println(cadena);
-					
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Hobbit/s");
+					System.out.println(cadena);
+
 				} else if (btnPersonaje2.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Humano/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Humano/s");
 					System.out.println(cadena);
 				} else if (btnPersonaje3.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Elfo/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Elfo/s");
 					System.out.println(cadena);
 				} else if (btnPersonaje4.isSelected() == true) {
-                                    setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Mago/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Mago/s");
 					System.out.println(cadena);
 				} else if (btnPersonaje5.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Enanos/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Enanos/s");
 					System.out.println(cadena);
 				} else if (btnPersonaje6.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Gollum/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Gollum/s");
 					System.out.println(cadena);
 				} else if (btnPersonaje7.isSelected() == true) {
-                                        setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Orco/s");
+					setCantidadPersonajes("Se han creado " + spnCantidad.getValue() + " Orco/s");
 					System.out.println(cadena);
 				}
 
-//				new VentanaPoblacion();
-//				this.setVisible(false);
 				btnPersonaje1.setSelected(false);
 				lblPersonaje1.setVisible(false);
 				btnPersonaje2.setSelected(false);
@@ -663,18 +612,18 @@ public class VentanaPersonajes extends JFrame implements ActionListener {
 				lblPersonaje6.setVisible(false);
 				btnPersonaje7.setSelected(false);
 				lblPersonaje7.setVisible(false);
-				
+
 				lblCaracteristicas.setVisible(false);
 
 				spnCantidad.setValue(0);
 			}
 
 		}
-		
-		 else if (e.getSource() == btnVerAldea){
-                        getVentanaPoblacion().setCadena(cadena);
-                        System.out.println(getVentanaPoblacion().getCadena());
-                        this.setVisible(false);
+
+		else if (e.getSource() == btnVerAldea) {
+			getVentanaPoblacion().setCadena(cadena);
+			System.out.println(getVentanaPoblacion().getCadena());
+			this.setVisible(false);
 		}
 
 	}

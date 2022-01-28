@@ -79,29 +79,24 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 	private JLabel lblPersonaje74;
 	private JLabel lblPersonaje75;
 	private JLabel lblPersonaje76;
-	
-	
+
 	private String cadena = "";
 
-	
-
 	public VentanaPoblacion() {
-		setSize(800, 600); // Establecer tamaño
+		setSize(800, 600); // Establecer tamaï¿½o
 		setTitle("The Lord Of Rings"); // Agregar Titulo;
 		setLocationRelativeTo(null);// salga en el centro
 		iniciarComponentes();
 		setResizable(false);
 	}
 
-    public void setCadena(String cadena1) {
-        this.cadena = cadena1;
-    }
+	public void setCadena(String cadena1) {
+		this.cadena = cadena1;
+	}
 
-    public String getCadena() {
-        return cadena;
-    }
-    
-        
+	public String getCadena() {
+		return cadena;
+	}
 
 	public void iniciarComponentes() {
 
@@ -290,7 +285,7 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 		lblPersonaje38.setIcon(Psj3);
 		lblPersonaje39.setIcon(Psj3);
 
-		int x41 = 250;
+		// int x41 = 250;
 		int y41 = 230;
 		int a41 = 90;
 		int b41 = 105;
@@ -427,26 +422,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 		lblPersonaje72.setBounds(90 + x71, 50 + y71, 60, 75);
 		lblPersonaje72.setVisible(false);
 
-
 		lblPersonaje73 = new JLabel();
 		lblPersonaje73.setBounds(150 + x71, 50 + y71, 60, 75);
 		lblPersonaje73.setVisible(false);
-
 
 		lblPersonaje74 = new JLabel();
 		lblPersonaje74.setBounds(210 + x71, 50 + y71, 60, 75);
 		lblPersonaje74.setVisible(false);
 
-
 		lblPersonaje75 = new JLabel();
 		lblPersonaje75.setBounds(270 + x71, 50 + y71, 60, 75);
 		lblPersonaje75.setVisible(false);
 
-
 		lblPersonaje76 = new JLabel();
 		lblPersonaje76.setBounds(330 + x71, 50 + y71, 60, 75);
 		lblPersonaje76.setVisible(false);
-
 
 		ImageIcon Personaje7 = new ImageIcon("img/Personaje7.png");
 		Icon Psj7 = new ImageIcon(Personaje7.getImage().getScaledInstance(lblPersonaje71.getWidth(),
@@ -525,7 +515,7 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 		pnlPrincipal.add(lblFondo);
 		add(pnlPrincipal);
 		this.setVisible(true);
-                System.out.println(cadena);
+		System.out.println(cadena);
 	}
 
 	@Override
@@ -539,11 +529,10 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 		else if (e.getSource() == btnActualizar) {
 
 			if (cadena.equalsIgnoreCase("Se han creado 1 Hobbit/s")) {
-                            System.out.println(cadena);
+				System.out.println(cadena);
 				lblPersonaje11.setVisible(true);
 
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 2 Hobbit/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 2 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
@@ -555,24 +544,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
 				lblPersonaje13.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Hobbit/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
 				lblPersonaje13.setVisible(true);
 				lblPersonaje14.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Hobbit/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
 				lblPersonaje13.setVisible(true);
 				lblPersonaje14.setVisible(true);
 				lblPersonaje15.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Hobbit/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
@@ -580,9 +566,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje14.setVisible(true);
 				lblPersonaje15.setVisible(true);
 				lblPersonaje16.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Hobbit/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
@@ -591,9 +576,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje15.setVisible(true);
 				lblPersonaje16.setVisible(true);
 				lblPersonaje17.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 8 Hobbit/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 8 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
@@ -603,9 +587,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje16.setVisible(true);
 				lblPersonaje17.setVisible(true);
 				lblPersonaje18.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 9 Hobbit/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 9 Hobbit/s")) {
 
 				lblPersonaje11.setVisible(true);
 				lblPersonaje12.setVisible(true);
@@ -616,16 +599,15 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje17.setVisible(true);
 				lblPersonaje18.setVisible(true);
 				lblPersonaje19.setVisible(true);
-				
+
 			}
-			
-			//Creacion de los personajes 2 (Humanos)
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Humano/s")) {
-				
+
+			// Creacion de los personajes 2 (Humanos)
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Humano/s")) {
+
 				lblPersonaje21.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
@@ -638,24 +620,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
 				lblPersonaje23.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Humano/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
 				lblPersonaje23.setVisible(true);
 				lblPersonaje24.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Humano/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
 				lblPersonaje23.setVisible(true);
 				lblPersonaje24.setVisible(true);
 				lblPersonaje25.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Humano/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
@@ -663,9 +642,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje24.setVisible(true);
 				lblPersonaje25.setVisible(true);
 				lblPersonaje26.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Humano/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
@@ -674,9 +652,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje25.setVisible(true);
 				lblPersonaje26.setVisible(true);
 				lblPersonaje27.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 8 Humano/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 8 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
@@ -686,9 +663,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje26.setVisible(true);
 				lblPersonaje27.setVisible(true);
 				lblPersonaje28.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 9 Humano/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 9 Humano/s")) {
 
 				lblPersonaje21.setVisible(true);
 				lblPersonaje22.setVisible(true);
@@ -699,17 +675,16 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje27.setVisible(true);
 				lblPersonaje28.setVisible(true);
 				lblPersonaje29.setVisible(true);
-				
+
 			}
-			
-			//Creacion Personaje 3
-			
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Elfo/s")) {
-				
+
+			// Creacion Personaje 3
+
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Elfo/s")) {
+
 				lblPersonaje31.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
@@ -722,24 +697,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
 				lblPersonaje33.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Elfo/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
 				lblPersonaje33.setVisible(true);
 				lblPersonaje34.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Elfo/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
 				lblPersonaje33.setVisible(true);
 				lblPersonaje34.setVisible(true);
 				lblPersonaje35.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Elfo/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
@@ -747,9 +719,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje34.setVisible(true);
 				lblPersonaje35.setVisible(true);
 				lblPersonaje36.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Elfo/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
@@ -758,9 +729,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje35.setVisible(true);
 				lblPersonaje36.setVisible(true);
 				lblPersonaje37.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 8 Elfo/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 8 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
@@ -770,9 +740,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje36.setVisible(true);
 				lblPersonaje37.setVisible(true);
 				lblPersonaje38.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 9 Elfo/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 9 Elfo/s")) {
 
 				lblPersonaje31.setVisible(true);
 				lblPersonaje32.setVisible(true);
@@ -783,16 +752,15 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje37.setVisible(true);
 				lblPersonaje38.setVisible(true);
 				lblPersonaje39.setVisible(true);
-				
+
 			}
-			
-			//Creacion Personaje 4
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Mago/s")) {
-				
+
+			// Creacion Personaje 4
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Mago/s")) {
+
 				lblPersonaje41.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
@@ -805,24 +773,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
 				lblPersonaje43.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Mago/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
 				lblPersonaje43.setVisible(true);
 				lblPersonaje44.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Mago/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
 				lblPersonaje43.setVisible(true);
 				lblPersonaje44.setVisible(true);
 				lblPersonaje45.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Mago/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
@@ -830,9 +795,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje44.setVisible(true);
 				lblPersonaje45.setVisible(true);
 				lblPersonaje46.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Mago/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
@@ -841,9 +805,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje45.setVisible(true);
 				lblPersonaje46.setVisible(true);
 				lblPersonaje47.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 8 Mago/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 8 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
@@ -853,9 +816,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje46.setVisible(true);
 				lblPersonaje47.setVisible(true);
 				lblPersonaje48.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 9 Mago/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 9 Mago/s")) {
 
 				lblPersonaje41.setVisible(true);
 				lblPersonaje42.setVisible(true);
@@ -866,15 +828,14 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje47.setVisible(true);
 				lblPersonaje48.setVisible(true);
 				lblPersonaje49.setVisible(true);
-				
+
 			}
-			//Creacion Personaje 5
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Enanos/s")) {
-				
+			// Creacion Personaje 5
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Enanos/s")) {
+
 				lblPersonaje51.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
@@ -887,24 +848,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
 				lblPersonaje53.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Enanos/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
 				lblPersonaje53.setVisible(true);
 				lblPersonaje54.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Enanos/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
 				lblPersonaje53.setVisible(true);
 				lblPersonaje54.setVisible(true);
 				lblPersonaje55.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Enanos/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
@@ -912,9 +870,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje54.setVisible(true);
 				lblPersonaje55.setVisible(true);
 				lblPersonaje56.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Enanos/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
@@ -923,9 +880,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje55.setVisible(true);
 				lblPersonaje56.setVisible(true);
 				lblPersonaje57.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 8 Enanos/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 8 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
@@ -935,9 +891,8 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje56.setVisible(true);
 				lblPersonaje57.setVisible(true);
 				lblPersonaje58.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 9 Enanos/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 9 Enanos/s")) {
 
 				lblPersonaje51.setVisible(true);
 				lblPersonaje52.setVisible(true);
@@ -948,17 +903,16 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje57.setVisible(true);
 				lblPersonaje58.setVisible(true);
 				lblPersonaje59.setVisible(true);
-				
+
 			}
-			
-			//Creacion personaje 6 (Gollum)
-			
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Gollum/s")) {
-				
+
+			// Creacion personaje 6 (Gollum)
+
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Gollum/s")) {
+
 				lblPersonaje61.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Gollum/s")) {
 
 				lblPersonaje61.setVisible(true);
@@ -971,24 +925,25 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje61.setVisible(true);
 				lblPersonaje62.setVisible(true);
 				lblPersonaje63.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Gollum/s") || cadena.equalsIgnoreCase("Se han creado 5 Gollum/s") || 
-					cadena.equalsIgnoreCase("Se han creado 6 Gollum/s")|| cadena.equalsIgnoreCase("Se han creado 7 Gollum/s") ||
-					cadena.equalsIgnoreCase("Se han creado 8 Gollum/s") || cadena.equalsIgnoreCase("Se han creado 9 Gollum/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Gollum/s")
+					|| cadena.equalsIgnoreCase("Se han creado 5 Gollum/s")
+					|| cadena.equalsIgnoreCase("Se han creado 6 Gollum/s")
+					|| cadena.equalsIgnoreCase("Se han creado 7 Gollum/s")
+					|| cadena.equalsIgnoreCase("Se han creado 8 Gollum/s")
+					|| cadena.equalsIgnoreCase("Se han creado 9 Gollum/s")) {
 
 				lblPersonaje61.setVisible(true);
 				lblPersonaje62.setVisible(true);
 				lblPersonaje63.setVisible(true);
-				JOptionPane.showMessageDialog(null, "Limite de energía alcanzado, Máximos Gollums para generar: 3");
+				JOptionPane.showMessageDialog(null, "Limite de energÃ­a alcanzado, MÃ¡ximos Gollums para generar: 3");
 			}
-			
-			//Creacion Personaje 7
-			else if(cadena.equalsIgnoreCase("Se han creado 1 Orco/s")) {
-				
+
+			// Creacion Personaje 7
+			else if (cadena.equalsIgnoreCase("Se han creado 1 Orco/s")) {
+
 				lblPersonaje71.setVisible(true);
 			}
-			
-			
+
 			else if (cadena.equalsIgnoreCase("Se han creado 2 Orco/s")) {
 
 				lblPersonaje71.setVisible(true);
@@ -1001,24 +956,21 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje71.setVisible(true);
 				lblPersonaje72.setVisible(true);
 				lblPersonaje73.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 4 Orco/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 4 Orco/s")) {
 
 				lblPersonaje71.setVisible(true);
 				lblPersonaje72.setVisible(true);
 				lblPersonaje73.setVisible(true);
 				lblPersonaje74.setVisible(true);
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 5 Orco/s")) {
+			} else if (cadena.equalsIgnoreCase("Se han creado 5 Orco/s")) {
 
 				lblPersonaje71.setVisible(true);
 				lblPersonaje72.setVisible(true);
 				lblPersonaje73.setVisible(true);
 				lblPersonaje74.setVisible(true);
 				lblPersonaje75.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 6 Orco/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 6 Orco/s")) {
 
 				lblPersonaje71.setVisible(true);
 				lblPersonaje72.setVisible(true);
@@ -1026,10 +978,10 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje74.setVisible(true);
 				lblPersonaje75.setVisible(true);
 				lblPersonaje76.setVisible(true);
-				
-			}
-			else if (cadena.equalsIgnoreCase("Se han creado 7 Orco/s") || cadena.equalsIgnoreCase("Se han creado 8 Orco/s") ||
-					cadena.equalsIgnoreCase("Se han creado 9 Orco/s")) {
+
+			} else if (cadena.equalsIgnoreCase("Se han creado 7 Orco/s")
+					|| cadena.equalsIgnoreCase("Se han creado 8 Orco/s")
+					|| cadena.equalsIgnoreCase("Se han creado 9 Orco/s")) {
 
 				lblPersonaje71.setVisible(true);
 				lblPersonaje72.setVisible(true);
@@ -1037,11 +989,10 @@ public class VentanaPoblacion extends JFrame implements ActionListener {
 				lblPersonaje74.setVisible(true);
 				lblPersonaje75.setVisible(true);
 				lblPersonaje76.setVisible(true);
-				JOptionPane.showMessageDialog(null, "Limite de energía alcanzado, Máximos Orcos para generar: 6");
+				JOptionPane.showMessageDialog(null, "Limite de energÃ­a alcanzado, MÃ¡ximos Orcos para generar: 6");
 			}
-			
+
 		}
 	}
 
 }
-
